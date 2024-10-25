@@ -1,0 +1,12 @@
+menuconfig MODULES_RTL_CUSTOM
+	bool "rtl_custom"
+	default n
+	---help---
+		Enable support for rtl_custom
+
+menuconfig USER_RTL_CUSTOM
+	bool "rtl_custom running as userspace module"
+	default y
+	depends on BOARD_PROTECTED && MODULES_rtl_custom
+	---help---
+		Put rtl_custom in userspace memory
