@@ -1,3 +1,24 @@
+# Monopulse custom return to home module
+
+## Installation (WSL)
+
+```
+wsl --install -d Ubuntu-22.04
+git clone https://github.com/ES0R/PX4-Autopilot.git --recursive
+bash ./PX4-Autopilot/Tools/setup/ubuntu.sh
+exit
+wsl --shutdown
+```
+
+## Running
+
+Run `setup.sh` to make px4 and install QGroundControl
+
+```
+make px4_sitl
+make px4_sitl gz_x500
+```
+
 # PX4 Drone Autopilot
 
 [![Releases](https://img.shields.io/github/release/PX4/PX4-Autopilot.svg)](https://github.com/PX4/PX4-Autopilot/releases) [![DOI](https://zenodo.org/badge/22634/PX4/PX4-Autopilot.svg)](https://zenodo.org/badge/latestdoi/22634/PX4/PX4-Autopilot)
