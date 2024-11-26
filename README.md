@@ -15,8 +15,18 @@ wsl --shutdown
 Run `setup.sh` to make px4 and install QGroundControl
 
 ```
+./Tools/setup/ubuntu.sh
 make px4_sitl
 make px4_sitl gz_x500
+```
+
+Install QGroundControl
+```
+https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage
+```
+
+```
+
 ```
 
 # PX4 Drone Autopilot
