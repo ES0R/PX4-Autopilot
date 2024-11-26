@@ -83,71 +83,23 @@ RTLCustom::RTLCustom(int example_param, bool example_flag)
 void RTLCustom::run()
 {
     while (!should_exit()) {
-        //parameters_update();
+        parameters_update();
 
-        // bool DEBUG = false;
+        bool DEBUG = false;
 
-        // // Print Home Position
-        // if (_home_pos_sub.update() && DEBUG) {
-        //     //const home_position_s &home_pos = _home_pos_sub.get();
-        //     rtl_position.alt = _home_pos_sub.get().alt;
-        //     rtl_position.lat = _home_pos_sub.get().lat;
-        //     rtl_position.lon = _home_pos_sub.get().lon;
-        //     rtl_position.yaw = _home_pos_sub.get().yaw;
-        //     PX4_INFO("Home Position: Alt: %lf, Lat: %lf, Lon: %lf, Yaw: %lf",
-        //         rtl_position.alt, rtl_position.lat, rtl_position.lon, rtl_position.yaw);
-        // }
+        // Locations
+        print_home_location(DEBUG);
+        print_current_location(DEBUG);
 
-        // if (_global_pos_sub.update() && DEBUG){
-        //     global_position.alt = _global_pos_sub.get().alt;
-        //     global_position.lat = _global_pos_sub.get().lat;
-        //     global_position.lon = _global_pos_sub.get().lon;
-        //     PX4_INFO("Global Position: Alt: %lf, Lat: %lf, Lon: %lf",
-        //         global_position.alt, global_position.lat, global_position.lon);
-        // }
+        // Magnetic Bearing
+        float mag_heading_deg = calculate_mag_heading();
+        float current_heading_deg = calculate_current_heading();
+        float true_heading_deg = calculate_true_heading();
 
-        // // Print Attitude Data
-        // if (_vehicle_attitude_sub.updated() && DEBUG) {
-        //     vehicle_attitude_s attitude;
-        //     _vehicle_attitude_sub.copy(&attitude);
-        //     PX4_INFO("Attitude Quaternion: W: %.3f, X: %.3f, Y: %.3f, Z: %.3f",
-        //         (double)attitude.q[0],  // w component
-        //         (double)attitude.q[1],  // x component
-        //         (double)attitude.q[2],  // y component
-        //         (double)attitude.q[3]); // z component
-        // }
-
-        // // Print Magnetometer Data
-        // if (_vehicle_magnetometer_sub.updated() && DEBUG) {
-        //     vehicle_magnetometer_s magnetometer;
-        //     _vehicle_magnetometer_sub.copy(&magnetometer);
-        //     PX4_INFO("Magnetometer: X: %f, Y: %f, Z: %f gauss",
-        //         (double)magnetometer.magnetometer_ga[0],
-        //         (double)magnetometer.magnetometer_ga[1],
-        //         (double)magnetometer.magnetometer_ga[2]);
-        // }
-
-        //         // Get current attitude
-        // vehicle_attitude_s attitude;
-        // _vehicle_attitude_sub.copy(&attitude);
-        // float current_yaw = (double)atan2f(2.0f * (attitude.q[0] * attitude.q[3] + attitude.q[1] * attitude.q[2]),
-        //                                  1.0f - 2.0f * (attitude.q[2] * attitude.q[2] + attitude.q[3] * attitude.q[3]));
-
-        // // Calculate true bearing to home using home and global positions
-        // if (_home_pos_sub.update() && _global_pos_sub.update()) {
-        //     float dx = _home_pos_sub.get().lat - _global_pos_sub.get().lat;
-        //     float dy = _home_pos_sub.get().lon - _global_pos_sub.get().lon;
-        //     float true_bearing = atan2f(dy, dx);  // Radians
-
-        //     // Convert to degrees for printing
-        //     double true_bearing_deg = true_bearing * 180.0f / M_PIf;
-        //     double current_yaw_deg = current_yaw * 180.0f / M_PIf;
-
-        //     PX4_INFO("Bearing Comparison: True: %3.1f deg, Current Yaw: %3.1f deg, Difference: %3.1f deg",
-        //         (double)true_bearing_deg,
-        //         (double)current_yaw_deg,
-        //         (double)(true_bearing_deg - current_yaw_deg));
-        // }
+        PX4_INFO("GT: %3.1f deg, Attitude: %3.1f deg, Mag Bearing: %3.1f deg",
+            (double)true_heading_deg,
+            (double)current_heading_deg,
+            (double)mag_heading_deg);
 
         px4_usleep(1_s);
     }

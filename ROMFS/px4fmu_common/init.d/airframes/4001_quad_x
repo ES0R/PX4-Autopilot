@@ -22,4 +22,10 @@ param set-default CA_ROTOR2_KM -0.05
 param set-default CA_ROTOR3_PX -1
 param set-default CA_ROTOR3_PY 1
 param set-default CA_ROTOR3_KM -0.05
-set-default SENS_MAG_MODE 1
+
+# Fix altitude reference
+param set-default SIM_BARO_OFF_P 0
+param set-default EKF2_HGT_REF 1
+param set-default EKF2_GPS_ALT_BIAS 0
+param set-default HOME_POS_ALT 0
+param set-default HOME_ALT_OFFSET 0
